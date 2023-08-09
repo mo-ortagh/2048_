@@ -1,3 +1,5 @@
+package src;
+
 public class MoveEfficiency implements Comparable<MoveEfficiency>{
     private int numberOfEmptyTiles;
     private int score;
