@@ -1,14 +1,19 @@
-package src;//               A
+package src.main;
+//               A
 //              A A
 //             A   A
 //            A     A
 //           A       A
-//          A   |-/   A
+//          A         A
 //         A-----------A
 //        A             A
 //       A               A
 //      A                 A
 //     A                   A
+
+import src.processor.Controller;
+import src.processor.Model;
+import src.util.Message;
 
 import javax.swing.*;
 
@@ -18,7 +23,7 @@ public class Main {
         Controller controller = new Controller(model);
         JFrame game = new JFrame();
 
-        game.setTitle("2048 by AX");
+        game.setTitle(Message.TITLE);
         game.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         game.setSize(450, 500);
         game.setResizable(false);

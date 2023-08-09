@@ -1,15 +1,35 @@
-package src;
+package src.processor;
+
+import src.ai.Move;
+import src.ai.MoveEfficiency;
+import src.models.Tile;
 
 import java.util.*;
 
 public class Model {
     private static final int FIELD_WIDTH = 4;
     private Tile[][] gameTiles;
-    int maxTile = 2;
-    int score = 0;
+    private int maxTile = 2;
+    private int score = 0;
     private Stack<Tile[][]> previousStates = new Stack<>();
     private Stack<Integer> previousScores = new Stack<>();
     private boolean isSaveNeeded = true;
+
+    public void setMaxTile(int maxTile) {
+        this.maxTile = maxTile;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getMaxTile() {
+        return maxTile;
+    }
+
+    public int getScore() {
+        return score;
+    }
 
     public Model() {
         resetGameTiles();
@@ -56,7 +76,7 @@ public class Model {
     private boolean hasBoardChanged() {
         for (int i = 0; i < FIELD_WIDTH; i++) {
             for (int j = 0; j < FIELD_WIDTH; j++) {
-                if (gameTiles[i][j].value != previousStates.peek()[i][j].value) {
+                if (gameTiles[i][j].getValue() != previousStates.peek()[i][j].getValue()) {
                     return true;
                 }
             }
@@ -78,7 +98,7 @@ public class Model {
         Tile[][] tempTiles = new Tile[FIELD_WIDTH][FIELD_WIDTH];
         for (int i = 0; i < FIELD_WIDTH; i++) {
             for (int j = 0; j < FIELD_WIDTH; j++) {
-                tempTiles[i][j] = new Tile(tiles[i][j].value);
+                tempTiles[i][j] = new Tile(tiles[i][j].getValue());
             }
         }
         previousStates.push(tempTiles);
@@ -171,19 +191,19 @@ public class Model {
                 continue;
             }
 
-            if (i < FIELD_WIDTH - 1 && tiles[i].value == tiles[i + 1].value) {
-                int updatedValue = tiles[i].value * 2;
+            if (i < FIELD_WIDTH - 1 && tiles[i].getValue() == tiles[i + 1].getValue()) {
+                int updatedValue = tiles[i].getValue() * 2;
                 if (updatedValue > maxTile) {
                     maxTile = updatedValue;
                 }
                 score += updatedValue;
                 tilesList.addLast(new Tile(updatedValue));
-                tiles[i + 1].value = 0;
+                tiles[i + 1].setValue(0);;
                 tilesChanged = true;
             } else {
-                tilesList.addLast(new Tile(tiles[i].value));
+                tilesList.addLast(new Tile(tiles[i].getValue()));
             }
-            tiles[i].value = 0;
+            tiles[i].setValue(0);
         }
 
         for (int i = 0; i < tilesList.size(); i++) {
@@ -209,7 +229,7 @@ public class Model {
         if (!emptyTiles.isEmpty()) {
             int index = (int) (Math.random() * emptyTiles.size());
             Tile emptyTile = emptyTiles.get(index);
-            emptyTile.value = Math.random() < 0.9 ? 2 : 4;
+            emptyTile.setValue(Math.random() < 0.9 ? 2 : 4);
         }
     }
 
@@ -240,8 +260,8 @@ public class Model {
         for (int x = 0; x < FIELD_WIDTH; x++) {
             for (int y = 0; y < FIELD_WIDTH; y++) {
                 Tile t = gameTiles[x][y];
-                if ((x < FIELD_WIDTH - 1 && t.value == gameTiles[x + 1][y].value)
-                        || ((y < FIELD_WIDTH - 1) && t.value == gameTiles[x][y + 1].value)) {
+                if ((x < FIELD_WIDTH - 1 && t.getValue() == gameTiles[x + 1][y].getValue())
+                        || ((y < FIELD_WIDTH - 1) && t.getValue() == gameTiles[x][y + 1].getValue())) {
                     return true;
                 }
             }

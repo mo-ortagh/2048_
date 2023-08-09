@@ -1,4 +1,4 @@
-package src;
+package src.ai;
 
 public class MoveEfficiency implements Comparable<MoveEfficiency>{
     private int numberOfEmptyTiles;

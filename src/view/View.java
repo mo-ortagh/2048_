@@ -1,4 +1,9 @@
-package src;
+package src.view;
+
+import src.models.Tile;
+import src.processor.Controller;
+import src.processor.Model;
+import src.util.Message;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,14 +17,30 @@ public class View extends JPanel {
     private Model model;
     private Controller controller;
 
-    boolean isGameWon = false;
-    boolean isGameLost = false;
+    private boolean isGameWon = false;
+    private boolean isGameLost = false;
 
     public View(Controller controller, Model model) {
         this.model = model;
         setFocusable(true);
         this.controller = controller;
         addKeyListener(controller);
+    }
+
+    public void setGameWon(boolean gameWon) {
+        isGameWon = gameWon;
+    }
+
+    public void setGameLost(boolean gameLost) {
+        isGameLost = gameLost;
+    }
+
+    public boolean isGameWon() {
+        return isGameWon;
+    }
+
+    public boolean isGameLost() {
+        return isGameLost;
     }
 
     @Override
@@ -36,18 +57,18 @@ public class View extends JPanel {
         g.drawString("Score: " + controller.getScore(), 140, 465);
 
         if (isGameWon) {
-            JOptionPane.showMessageDialog(this, "You've won!");
-            model.maxTile = 0;
+            JOptionPane.showMessageDialog(this, Message.YOU_WON);
+            model.setMaxTile(0);
         } else if (isGameLost) {
-            JOptionPane.showMessageDialog(this, "You've lost :(");
-            model.maxTile = 0;
+            JOptionPane.showMessageDialog(this, Message.YOU_LOST);
+            model.setMaxTile(0);
         }
     }
 
     private void drawTile(Graphics g2, Tile tile, int x, int y) {
         Graphics2D g = ((Graphics2D) g2);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        int value = tile.value;
+        int value = tile.getValue();
         int xOffset = offsetCoors(x);
         int yOffset = offsetCoors(y);
         g.setColor(tile.getTileColor());
@@ -67,11 +88,11 @@ public class View extends JPanel {
             g.drawString(s, xOffset + (TILE_SIZE - w) / 2, yOffset + TILE_SIZE - (TILE_SIZE - h) / 2 - 2);
         if (isGameWon) {
             isGameWon = false;
-            JOptionPane.showMessageDialog(this, "You've won!\nScore: " + model.score, "AX", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, Message.YOU_WON + "\n"+ Message.SCORE + model.getScore(), Message.AX, JOptionPane.INFORMATION_MESSAGE);
             this.update(g);
         } else if (isGameLost) {
             isGameLost = false;
-            JOptionPane.showMessageDialog(this, "You've lost\nScore: " + model.score, "AX", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, Message.YOU_LOST + "\n"+ Message.SCORE + model.getScore(), Message.AX , JOptionPane.INFORMATION_MESSAGE);
             this.update(g);
         }
     }

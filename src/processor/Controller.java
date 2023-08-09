@@ -1,4 +1,7 @@
-package src;
+package src.processor;
+
+import src.view.View;
+import src.models.Tile;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -15,9 +18,9 @@ public class Controller extends KeyAdapter {
     }
 
     void resetGame() {
-        model.score = 0;
-        view.isGameLost = false;
-        view.isGameWon = false;
+        model.setScore(0);
+        view.setGameLost(false);
+        view.setGameWon(false);
         model.resetGameTiles();
     }
 
@@ -26,7 +29,7 @@ public class Controller extends KeyAdapter {
     }
 
     public int getScore() {
-        return model.score;
+        return model.getScore();
     }
 
     public View getView() {
@@ -39,9 +42,9 @@ public class Controller extends KeyAdapter {
             resetGame();
         }
         if (!model.canMove()) {
-            view.isGameLost = true;
+            view.setGameLost(true);
         }
-        if (!view.isGameWon && !view.isGameLost) {
+        if (!view.isGameWon() && !view.isGameLost()) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
                 model.left();
@@ -65,8 +68,8 @@ public class Controller extends KeyAdapter {
                     model.autoMove();
             }
         }
-        if (model.maxTile == WINNING_TILE) {
-            view.isGameWon = true;
+        if (model.getMaxTile() == WINNING_TILE) {
+            view.setGameWon(true);
         }
         view.repaint();
     }

@@ -1,14 +1,22 @@
-package src;
+package src.models;
 
 import java.awt.*;
 
 public class Tile {
-    int value = 0;
+    private int value = 0;
 
-    Tile() {
+    public Tile() {
     }
 
-    Tile(int value) {
+    public Tile(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
         this.value = value;
     }
 
@@ -16,11 +24,11 @@ public class Tile {
         return value == 0;
     }
 
-    Color getFontColor() {
+    public Color getFontColor() {
         return value < 16 ? new Color(0x776e65) : new Color(0xf9f6f2);
     }
 
-    Color getTileColor() {
+    public Color getTileColor() {
         switch (value) {
             case 0:
                 return new Color(0xcdc1b4);
