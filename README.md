@@ -1,4 +1,4 @@
-<h1  style="color:orange" align="center">Hi there, I'm Axion</a> 
+<h1  style="color:orange align="center">Hi there, I'm Axion</a> 
 <img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif" height="32"/></h1>
 <h3 align="center">Welcome to my project!</h3>
 <p><b style="color:orange">2048</b> is a browser game written by 19-year-old Italian developer <i>Gabriele Cirulli</i> in the JavaScript programming language.</p> 
