@@ -1,5 +1,4 @@
-<h1  style="color:orange align="center">Hi there, I'm Axion</a> 
-<img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif" height="32"/></h1>
+<h1  style="color:orange" align="center">Hi there, I'm Axion</h1> 
 <h3 align="center">Welcome to my project!</h3>
 <p><b style="color:orange">2048</b> is a browser game written by 19-year-old Italian developer <i>Gabriele Cirulli</i> in the JavaScript programming language.</p> 
 <p>The playing field has the shape of a 4x4 square.
@@ -17,7 +16,7 @@ The game ends in defeat if it is impossible to perform an action after the next 
 <p><b>This project is my own version of 2048 written in Java.</b></p>
 <h3  style="color:orange" align="left">SETTINGS</h3>
 <p>To control the tiles, use the keys <b style="color:orange">LEFT, RIGHT, UP, DOWN</b>.<br>
-Press <b style="color:orange">Z</b> if you want go back one turn.<br>
+Press <b style="color:orange">Z</b> if you want to go back one turn.<br>
 You can make a random move if you press <b style="color:orange">R</b>.<br>
 Press <b style="color:orange">A</b> to make smart-move (Auto move).</p>
 <pre style="color:orange">               A
